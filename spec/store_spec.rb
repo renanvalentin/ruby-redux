@@ -24,4 +24,11 @@ describe Store do
         state = @store.get_state
         state.must_equal @reducer.call(initial_state)
     end
+
+    it "should call listeners after calling dispatch" do
+        count = 0
+        @store.subscribe(lambda { count = 1})
+        @store.dispatch
+        count.must_equal 1
+    end
 end

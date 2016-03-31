@@ -4,6 +4,7 @@ class Store
         @reducer = reducer 
 
         @state = initial_state unless initial_state.nil?
+        @listeners = []
     end
     
     def get_state
@@ -12,5 +13,10 @@ class Store
 
     def dispatch
         @state =  @reducer.call(@state)
+        @listeners.each {|listener| listener.call()}
+    end
+
+    def subscribe(listener)
+        @listeners << listener
     end
 end
