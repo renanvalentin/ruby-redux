@@ -1,9 +1,16 @@
-class Meme
-    def i_can_has_cheezburger?
+class Store
+    def initialize(reducer, initial_state = nil)
+        raise "reducer cannot be nil" if reducer.nil? 
+        @reducer = reducer 
+
+        @state = initial_state unless initial_state.nil?
+    end
+    
+    def get_state
         "OHAI!"
     end
 
-    def will_it_blend?
-        "YES!"
+    def dispatch
+        @state =  @reducer.call(@state)
     end
 end
