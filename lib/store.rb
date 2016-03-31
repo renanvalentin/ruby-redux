@@ -7,7 +7,7 @@ class Store
     end
     
     def get_state
-        "OHAI!"
+        @state
     end
 
     def dispatch
