@@ -18,5 +18,9 @@ class Store
 
     def subscribe(listener)
         @listeners << listener
+        
+        lambda do
+            @listeners = @listeners.select {|l| l != listener}    
+        end
     end
 end

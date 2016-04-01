@@ -31,4 +31,18 @@ describe Store do
         @store.dispatch
         count.must_equal 1
     end
+
+    it "should unsubscribe from the stores subscription" do
+        count = 0
+        
+        unsubscribe = @store.subscribe(lambda { count = count + 1})
+       
+        @store.dispatch
+        count.must_equal 1
+
+        unsubscribe.call()
+       
+        @store.dispatch
+        count.must_equal 1
+    end
 end
